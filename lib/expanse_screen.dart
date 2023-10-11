@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:expanse/widget/expanse_List.dart';
 import 'package:expanse/widget/new_expanse.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,7 @@ class Expanses extends StatefulWidget {
 }
 
 class _ExpansesState extends State<Expanses> {
-  final List<ExpanseModel> _expanseList = [
+ final List<ExpanseModel> _expanseList = [
     ExpanseModel(
       category: Category.food,
       title: "Burger",
@@ -30,8 +32,22 @@ class _ExpansesState extends State<Expanses> {
         amount: 10,
         date: DateTime.now()),
   ];
+  void _addNewExpanse(ExpanseModel expanse) {
+    setState(() {
+      _expanseList.add(expanse);
+      log(_expanseList.toString());
+    });
+
+  }
+ void _removeNewExpanse(ExpanseModel expanse) {
+   setState(() {
+     _expanseList.remove(expanse);
+   });
+ }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -40,7 +56,9 @@ class _ExpansesState extends State<Expanses> {
               showModalBottomSheet(
                 context: context,
                 builder: (ctx) {
-                  return const  NewExpanse();
+                  return NewExpanse(
+                    addNewExpanse: _addNewExpanse,
+                  );
                 },
               );
             },
@@ -53,7 +71,7 @@ class _ExpansesState extends State<Expanses> {
       body: Column(
         children: [
           Expanded(
-            child: ExpanseList(expanseList: _expanseList),
+            child: ExpanseList(expanseList: _expanseList, removeExpanse:_removeNewExpanse,),
           )
         ],
       ),

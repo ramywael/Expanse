@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:expanse/model/expanse.dart';
 
 class NewExpanse extends StatefulWidget {
-  const NewExpanse({Key? key}) : super(key: key);
+  final void Function(ExpanseModel) addNewExpanse;
+  const NewExpanse({Key? key, required this.addNewExpanse}) : super(key: key);
 
   @override
   State<NewExpanse> createState() => _NewExpanseState();
@@ -136,6 +137,11 @@ class _NewExpanseState extends State<NewExpanse> {
                           );
                         },
                       );
+                    }else{
+                      widget.addNewExpanse(
+                        ExpanseModel(category: _selectedCategory, title: _titleController.text, amount: _doubledamount, date: _selectedDate!)
+                      );
+                      Navigator.of(context).pop();
                     }
                     _titleController.clear();
                     _amountController.clear();
