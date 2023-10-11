@@ -18,7 +18,7 @@ class _NewExpanseState extends State<NewExpanse> {
   final TextEditingController _amountController = TextEditingController();
   final now = DateTime.now();
   DateTime? _selectedDate;
-   Category _selectedCategory= Category.food;
+  Category _selectedCategory = Category.food;
   final formatter = DateFormat.yMd();
   @override
   void dispose() {
@@ -100,8 +100,8 @@ class _NewExpanseState extends State<NewExpanse> {
                       .toList(),
                   onChanged: (newCat) {
                     setState(() {
-                      if(newCat == null) return;
-                      _selectedCategory=newCat;
+                      if (newCat == null) return;
+                      _selectedCategory = newCat;
                     });
                   },
                 ),
@@ -109,11 +109,33 @@ class _NewExpanseState extends State<NewExpanse> {
                 ElevatedButton(
                   onPressed: () {
                     log(_titleController.text);
-                    final double? _doubledamount = double.tryParse(_amountController.text);
-                    final bool _isAmountInvalid= _doubledamount == null || _doubledamount <= 0;
-                    if(_titleController.text.trim().isEmpty || _isAmountInvalid || _selectedDate == null) {
+                    final double? _doubledamount =
+                        double.tryParse(_amountController.text);
+                    final bool _isAmountInvalid =
+                        _doubledamount == null || _doubledamount <= 0;
+                    if (_titleController.text.trim().isEmpty ||
+                        _isAmountInvalid ||
+                        _selectedDate == null) {
                       log("Error");
                       //the trim function used to remove the white spaces from the string
+                      showDialog(
+                        context: context,
+                        builder: (ctx) {
+                          return AlertDialog(
+                            title: const Text("Invalid Input"),
+                            content: const Text(
+                                "Please make sure you entered the title , amount and date correctly"),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(ctx);
+                                },
+                                child: const Text("Okay"),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     }
                     _titleController.clear();
                     _amountController.clear();
