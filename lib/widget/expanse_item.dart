@@ -28,7 +28,7 @@ class ExplanseItem extends StatelessWidget {
                 const Spacer(),
                 Row(
                   children: [
-                    const Icon(Icons.calendar_today),
+                     Icon(categoryIconData[expanseItem.category]), //Here we access the map and then choose the key to decide which icon should be displayed
                     const SizedBox(
                       width: 5,
                     ),
