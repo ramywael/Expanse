@@ -109,6 +109,12 @@ class _NewExpanseState extends State<NewExpanse> {
                 ElevatedButton(
                   onPressed: () {
                     log(_titleController.text);
+                    final double? _doubledamount = double.tryParse(_amountController.text);
+                    final bool _isAmountInvalid= _doubledamount == null || _doubledamount <= 0;
+                    if(_titleController.text.trim().isEmpty || _isAmountInvalid || _selectedDate == null) {
+                      log("Error");
+                      //the trim function used to remove the white spaces from the string
+                    }
                     _titleController.clear();
                     _amountController.clear();
                   },
