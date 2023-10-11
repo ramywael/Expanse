@@ -1,4 +1,5 @@
 import 'package:expanse/widget/expanse_List.dart';
+import 'package:expanse/widget/new_expanse.dart';
 import 'package:flutter/material.dart';
 
 import 'model/expanse.dart';
@@ -32,15 +33,30 @@ class _ExpansesState extends State<Expanses> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        Expanded(
-          child: ExpanseList(expanseList: _expanseList),
-        )
-      ],
-    ),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (ctx) {
+                  return const  NewExpanse();
+                },
+              );
+            },
+            icon: const Icon(
+              Icons.add,
+            ),
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: ExpanseList(expanseList: _expanseList),
+          )
+        ],
+      ),
     );
   }
 }
-
-
