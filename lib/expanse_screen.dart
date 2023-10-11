@@ -1,12 +1,46 @@
+import 'package:expanse/widget/expanse_List.dart';
 import 'package:flutter/material.dart';
 
-class Expanses extends StatelessWidget {
+import 'model/expanse.dart';
+
+class Expanses extends StatefulWidget {
   const Expanses({Key? key}) : super(key: key);
 
   @override
+  State<Expanses> createState() => _ExpansesState();
+}
+
+class _ExpansesState extends State<Expanses> {
+  final List<ExpanseModel> _expanseList = [
+    ExpanseModel(
+      category: Category.food,
+      title: "Burger",
+      amount: 29.7,
+      date: DateTime.now(),
+    ),
+    ExpanseModel(
+        category: Category.travel,
+        title: "Paris",
+        amount: 2000,
+        date: DateTime.now()),
+    ExpanseModel(
+        category: Category.work,
+        title: "Metro",
+        amount: 10,
+        date: DateTime.now()),
+  ];
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      
+    return Scaffold(
+        body: Column(
+      children: [
+        Expanded(
+          child: ExpanseList(expanseList: _expanseList),
+        )
+      ],
+    ),
     );
   }
 }
+
+
