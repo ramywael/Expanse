@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:expanse/model/expanse.dart';
 
 class NewExpanse extends StatefulWidget {
   const NewExpanse({Key? key}) : super(key: key);
@@ -17,6 +18,7 @@ class _NewExpanseState extends State<NewExpanse> {
   final TextEditingController _amountController = TextEditingController();
   final now = DateTime.now();
   DateTime? _selectedDate;
+   Category _selectedCategory= Category.food;
   final formatter = DateFormat.yMd();
   @override
   void dispose() {
@@ -66,7 +68,6 @@ class _NewExpanseState extends State<NewExpanse> {
                         : formatter.format(_selectedDate!)),
                     IconButton(
                       onPressed: () async {
-
                         final DateTime? pickedData = await showDatePicker(
                           context: context,
                           initialDate: now,
@@ -84,26 +85,43 @@ class _NewExpanseState extends State<NewExpanse> {
               )
             ],
           ),
-          Row(
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  log(_titleController.text);
-                  _titleController.clear();
-                  _amountController.clear();
-                },
-                child: const Text("Save Expanse"),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text("Cancel"),
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.only(top: 26.0),
+            child: Row(
+              children: [
+                DropdownButton(
+                  value: _selectedCategory,
+                  //it is the value that will be displayed in the dropdown button
+                  items: Category.values
+                      .map((e) => DropdownMenuItem(
+                            value: e,
+                            child: Text(e.name.toUpperCase()),
+                          ))
+                      .toList(),
+                  onChanged: (newCat) {
+                    setState(() {
+                      if(newCat == null) return;
+                      _selectedCategory=newCat;
+                    });
+                  },
+                ),
+                const Spacer(),
+                ElevatedButton(
+                  onPressed: () {
+                    log(_titleController.text);
+                    _titleController.clear();
+                    _amountController.clear();
+                  },
+                  child: const Text("Save Expanse"),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("Cancel"),
+                ),
+              ],
+            ),
           ),
         ],
       ),
