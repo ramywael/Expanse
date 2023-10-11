@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../model/expanse.dart';
+import 'expanse_item.dart';
 
 class ExpanseList extends StatelessWidget {
   const ExpanseList({
@@ -15,8 +16,9 @@ class ExpanseList extends StatelessWidget {
     return ListView.builder(
       itemCount: _expanseList.length,
       itemBuilder: (context, index) {
-        return Text(_expanseList[index].title);
+        return ExplanseItem(expanseItem: _expanseList[index]);
       },
     );
   }
 }
+
