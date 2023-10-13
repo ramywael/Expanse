@@ -19,6 +19,10 @@ class ExpanseList extends StatelessWidget {
       itemBuilder: (context, index) {
         return Dismissible(
           key: ValueKey(_expanseList[index]), // each item should have a key to identify the item
+         background: Container(
+           color: ThemeMode == ThemeMode.dark ? Colors.red : Theme.of(context).colorScheme.error,
+           margin: EdgeInsets.symmetric(horizontal: Theme.of(context).cardTheme.margin!.horizontal)
+        ),
           onDismissed:(direction) => removeExpanse(_expanseList[index]),
           child: ExplanseItem(
             expanseItem: _expanseList[index],

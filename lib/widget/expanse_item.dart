@@ -15,9 +15,12 @@ class ExplanseItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
+          crossAxisAlignment:
+              CrossAxisAlignment.start, // to align the text to the left
           children: [
             Text(
               expanseItem.title,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             Row(
               children: [
