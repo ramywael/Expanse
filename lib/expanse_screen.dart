@@ -1,9 +1,9 @@
 import 'dart:developer';
-
 import 'package:expanse/widget/expanse_List.dart';
 import 'package:expanse/widget/new_expanse.dart';
 import 'package:flutter/material.dart';
 
+import 'chart/chart.dart';
 import 'model/expanse.dart';
 
 class Expanses extends StatefulWidget {
@@ -46,18 +46,18 @@ class _ExpansesState extends State<Expanses> {
     });
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+      SnackBar(
         duration: const Duration(seconds: 3),
-    content: const Text('Expense deleted.'),
-    action: SnackBarAction(
-    label: 'Undo',
-    onPressed: () {
-    setState(() {
-      _expanseList.insert(expenseIndex, expanse);
-    });
-    },
-    ),
-    ),
+        content: const Text('Expense deleted.'),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            setState(() {
+              _expanseList.insert(expenseIndex, expanse);
+            });
+          },
+        ),
+      ),
     );
     const ScaffoldMessenger(
       child: SnackBar(
@@ -95,6 +95,9 @@ class _ExpansesState extends State<Expanses> {
       ),
       body: Column(
         children: [
+          Chart(
+            expansesList: _expanseList,
+          ),
           Expanded(
             child: ExpanseList(
               expanseList: _expanseList,
