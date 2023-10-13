@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'package:expanse/widget/expanse_List.dart';
 import 'package:expanse/widget/new_expanse.dart';
 import 'package:flutter/material.dart';
-
 import 'chart/chart.dart';
 import 'model/expanse.dart';
 
@@ -15,22 +14,23 @@ class Expanses extends StatefulWidget {
 
 class _ExpansesState extends State<Expanses> {
   final List<ExpanseModel> _expanseList = [
-    ExpanseModel(
-      category: Category.food,
-      title: "Burger",
-      amount: 29.7,
-      date: DateTime.now(),
-    ),
-    ExpanseModel(
-        category: Category.travel,
-        title: "Paris",
-        amount: 2000,
-        date: DateTime.now()),
-    ExpanseModel(
-        category: Category.work,
-        title: "Metro",
-        amount: 10,
-        date: DateTime.now()),
+    // ExpanseModel(
+    //   category: Category.food,
+    //   title: "Burger",
+    //   amount: 29.7,
+    //   date: DateTime.now(),
+    // ),
+    // ExpanseModel(
+    //     category: Category.travel,
+    //     title: "Paris",
+    //     amount: 2000,
+    //     date: DateTime.now()),
+    // ExpanseModel(
+    //     category: Category.work,
+    //     title: "Metro",
+    //     amount: 10,
+    //     date: DateTime.now()),
+
   ];
   void _addNewExpanse(ExpanseModel expanse) {
     setState(() {
@@ -68,7 +68,6 @@ class _ExpansesState extends State<Expanses> {
       ),
     );
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

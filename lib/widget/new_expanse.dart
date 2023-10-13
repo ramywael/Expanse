@@ -30,6 +30,7 @@ class _NewExpanseState extends State<NewExpanse> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDark=MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -49,9 +50,12 @@ class _NewExpanseState extends State<NewExpanse> {
                 child: TextField(
                   controller: _amountController,
                   maxLength: 50,
-                  decoration: const InputDecoration(
-                    label: Text("Amount"),
+                  decoration:  InputDecoration(
+                    label: const Text("Amount"),
                     prefixText: "\$",
+                    prefixStyle: TextStyle(
+                      color: isDark ? Colors.white : Colors.black,
+                    )
                   ),
                   keyboardType: TextInputType
                       .number, //the max number of characters that the user can enter
