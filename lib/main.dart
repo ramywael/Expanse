@@ -15,7 +15,7 @@ class ExpanseApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
       theme: ThemeData().copyWith(
         useMaterial3: true,
@@ -50,7 +50,7 @@ class ExpanseApp extends StatelessWidget {
 
       darkTheme : ThemeData.dark().copyWith(
           useMaterial3: true,
-          colorScheme: colorScheme,
+          colorScheme: darkColorScheme,
           appBarTheme: const AppBarTheme().copyWith(
             backgroundColor: darkColorScheme.onPrimaryContainer,
             foregroundColor: darkColorScheme.primary,
