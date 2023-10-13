@@ -6,26 +6,26 @@ import '../model/expanse.dart';
 class Chart extends StatelessWidget {
   final List<ExpanseModel> expansesList;
   const Chart({Key? key, required this.expansesList}) : super(key: key);
-  List<ExpansesBucket> get buckets{
-   return [
-   ExpansesBucket.forCategory(Category.food,expansesList),
-   ExpansesBucket.forCategory(Category.travel,expansesList),
-   ExpansesBucket.forCategory(Category.entertainment,expansesList),
-   ExpansesBucket.forCategory(Category.work,expansesList),
-   ExpansesBucket.forCategory(Category.other,expansesList),
-   ];
-   }
-  double get maxAmount{
-    double maxAmountForCategory=0;
-    for(var bucket in buckets)
-      {
-        if(bucket.totalAmount>maxAmountForCategory)
-          {
-            maxAmountForCategory=bucket.totalAmount;
-          }
+  List<ExpansesBucket> get buckets {
+    return [
+      ExpansesBucket.forCategory(Category.food, expansesList),
+      ExpansesBucket.forCategory(Category.travel, expansesList),
+      ExpansesBucket.forCategory(Category.entertainment, expansesList),
+      ExpansesBucket.forCategory(Category.work, expansesList),
+      ExpansesBucket.forCategory(Category.other, expansesList),
+    ];
+  }
+
+  double get maxAmount {
+    double maxAmountForCategory = 0;
+    for (var bucket in buckets) {
+      if (bucket.totalAmount > maxAmountForCategory) {
+        maxAmountForCategory = bucket.totalAmount;
       }
+    }
     return maxAmountForCategory;
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,32 +47,34 @@ class Chart extends StatelessWidget {
           children: [
             Expanded(
               child: Row(
-           //     crossAxisAlignment: CrossAxisAlignment.end,
+                //     crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   for (final element in buckets)
-                   const ChartBar(),
+                    ChartBar(
+                      fill: element.totalAmount == 0
+                          ? 0
+                          : element.totalAmount / maxAmount,
+                    ),
                 ],
               ),
             ),
-            const  SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
                 children: buckets
                     .map(
-                      (e) =>  const Expanded(
-                        child:  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 4),
-                    child:  Icon(
-                        Icons.abc,
-                    ),
-                  ),
+                      (e) => const Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 4),
+                          child: Icon(
+                            Icons.abc,
+                          ),
+                        ),
                       ),
-                )
+                    )
                     .toList())
           ],
-        )
-    );
-
+        ));
   }
 }
